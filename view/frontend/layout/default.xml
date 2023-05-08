@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main.content.top">
+                <block class="Wisepet\Slider\Block\Set\View" name="text-slider" template="Wisepet_Slider::slider/view.phtml" ifconfig="slider/slider_config/enable_module" />
+        </referenceContainer>
+    </body>
+</page>

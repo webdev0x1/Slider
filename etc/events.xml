@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="wisepet_slider_api_data_sliderinterface_save_before">
+        <observer name="legacy_wisepet_slider_save_before" instance="Magento\Framework\EntityManager\Observer\BeforeEntitySave" />
+    </event>
+    <event name="wisepet_slider_api_data_sliderinterface_save_after">
+        <observer name="legacy_wisepet_slider_save_after" instance="Magento\Framework\EntityManager\Observer\AfterEntitySave" />
+    </event>
+    <event name="wisepet_slider_api_data_sliderinterface_delete_before">
+        <observer name="legacy_wisepet_slider_delete_before" instance="Magento\Framework\EntityManager\Observer\BeforeEntityDelete" />
+    </event>
+    <event name="wisepet_slider_api_data_sliderinterface_delete_after">
+        <observer name="legacy_wisepet_slider_delete_after" instance="Magento\Framework\EntityManager\Observer\AfterEntityDelete" />
+    </event>
+    <event name="wisepet_slider_api_data_sliderinterface_load_after">
+        <observer name="legacy_wisepet_slider_load_after" instance="Magento\Framework\EntityManager\Observer\AfterEntityLoad" />
+    </event>
+</config>

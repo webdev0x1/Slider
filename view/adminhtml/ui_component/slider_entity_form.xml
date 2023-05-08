@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">slider_entity_form.slider_entity_form_data_source</item>
+            <item name="deps" xsi:type="string">slider_entity_form.slider_entity_form_data_source</item>
+            <item name="namespace" xsi:type="string">slider_entity_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="childrenFromMeta" xsi:type="boolean">true</item>
+    </argument>
+    <settings>
+        <reloadItem>general.attribute_set_id:value</reloadItem>
+        <buttons>
+            <button name="save" class="Wisepet\Slider\Ui\Component\Entity\Edit\Button\Save"/>
+            <button name="delete" class="Wisepet\ScopedEav\Ui\Component\Entity\Edit\Button\Delete"/>
+            <button name="back" class="Wisepet\ScopedEav\Ui\Component\Entity\Edit\Button\Back"/>
+        </buttons>
+        <deps>
+            <dep>slider_entity_form.slider_entity_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="slider_entity_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Wisepet\Slider\Ui\DataProvider\Slider\Form\SliderDataProvider</argument>
+            <argument name="name" xsi:type="string">slider_entity_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+</form>

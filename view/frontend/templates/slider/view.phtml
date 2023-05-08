@@ -1,0 +1,67 @@
+<?php
+$entity = $block->getEntities();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$sliderSpeed = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('slider/slider_config/slider_speed');
+
+?>
+
+<style>
+.tns-controls button:first-child {
+            float: left;
+    left: 0px;
+    clear: both;
+}
+.tns-controls button:nth-child(2) {
+    float: right;
+    display: block;
+    right: 0px;
+}
+
+#wisepet-slider-iw {
+    text-align: center;
+}
+</style>
+<div class="widget block block-static-block slider">
+<div class="container page-main">
+<div class="wisepet-content-slider" id="wisepet-slider">
+<?php $i = 0; foreach($entity as $slider): ?>
+        <div class="item" >
+        <div class="img img-1">
+              <?php echo $slider->getContent(); ?>
+            </div>
+        </div>
+<?php $i++; endforeach; ?>
+</div>
+</div>
+</div>
+<script type="text/x-magento-init">
+ {
+    ".wisepet-content-slider": {
+        "tinySliderInit": {
+            "items": 1,
+                    "controls": true,
+                    "nav":false,
+		    "controlsText": ["<",">"],
+                    "autoplayButton": false,
+                    "autoplayButtonOutput":false,
+		    "speed": 500,
+		    "autoHeight": true,
+                    "loop": false,
+                    "mouseDrag": false,
+            "autoplay": false,
+            "autoplayHoverPause": true,
+            "autoplayTimeout": <?php echo $sliderSpeed; ?>,
+	    "preventActionWhenRunning": true,
+            "responsive": {
+                 "640": {
+                     "items": 1
+                 },
+                 "1024": {
+                     "items": 1
+                 }
+            }
+        }
+    }
+ }
+</script>

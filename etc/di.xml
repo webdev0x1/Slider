@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Default implementation for API interfaces -->
+    <preference for="Wisepet\Slider\Api\Data\SliderInterface" type="Wisepet\Slider\Model\Slider" />
+    <preference for="Wisepet\Slider\Api\Data\SliderAttributeInterface" type="Wisepet\Slider\Model\Slider\Attribute" />
+
+    <preference for="Wisepet\Slider\Api\SliderRepositoryInterface" type="Wisepet\Slider\Model\SliderRepository" />
+    <preference for="Wisepet\Slider\Api\SliderAttributeRepositoryInterface" type="Wisepet\Slider\Model\SliderAttributeRepository" />
+
+    <preference for="Wisepet\Slider\Api\Data\SliderSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Wisepet\Slider\Api\Data\SliderInterface" xsi:type="string">Wisepet\Slider\Api\SliderRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Wisepet\Slider\Api\Data\SliderInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">wisepet_slider</item>
+                    <item name="eavEntityType" xsi:type="string">wisepet_slider</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                    <item name="entityContext" xsi:type="array">
+                        <item name="store" xsi:type="string">Magento\Store\Model\StoreScopeProvider</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Wisepet\Slider\EntityCreator\MetadataPool" type="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Wisepet\Slider\Api\Data\SliderInterface" xsi:type="array">
+                    <item name="entityContext" xsi:type="array">
+                        <item name="store" xsi:type="string">Magento\Store\Model\StoreScopeProvider</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Wisepet\Slider\Model\Entity\CreationScopeResolver" type="Magento\Framework\Model\Entity\ScopeResolver">
+        <arguments>
+            <argument name="metadataPool" xsi:type="object">Wisepet\Slider\EntityCreator\MetadataPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Wisepet\Slider\Model\ResourceModel\CreateHandler" type="Magento\Eav\Model\ResourceModel\CreateHandler">
+        <arguments>
+            <argument name="metadataPool" xsi:type="object">Wisepet\Slider\EntityCreator\MetadataPool</argument>
+            <argument name="scopeResolver" xsi:type="object">Wisepet\Slider\Model\Entity\CreationScopeResolver</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Wisepet\Slider\Model\ResourceModel\UpdateHandler" type="Magento\Eav\Model\ResourceModel\UpdateHandler">
+        <arguments>
+            <argument name="attributePersistor" xsi:type="object">Wisepet\ScopedEav\Model\ResourceModel\AttributePersistor</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\EntityManager\Operation\AttributePool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="eav" xsi:type="array">
+                    <item name="Wisepet\Slider\Api\Data\SliderInterface" xsi:type="array">
+                        <item name="create" xsi:type="string">Wisepet\Slider\Model\ResourceModel\CreateHandler</item>
+                        <item name="update" xsi:type="string">Wisepet\Slider\Model\ResourceModel\UpdateHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Wisepet\Slider\Api\Data\SliderInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="slider_attribute_listing_data_source" xsi:type="string">Wisepet\Slider\Model\ResourceModel\Slider\Attribute\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Eav\Model\Attribute\FrontendType">
+        <arguments>
+            <argument name="config" xsi:type="array">
+                <item name="select" xsi:type="array">
+                    <item name="select" xsi:type="string">select</item>
+                    <item name="wisepet_slider" xsi:type="string">wisepet_slider</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Wisepet\Slider\Model\Api\SearchCriteria\SliderCollectionProcessor" type="Magento\Eav\Model\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Eav\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Wisepet\Slider\Model\SliderRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Wisepet\Slider\Model\Api\SearchCriteria\SliderCollectionProcessor</argument>
+        </arguments>
+    </type>
+</config>

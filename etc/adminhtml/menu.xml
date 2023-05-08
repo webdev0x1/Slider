@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Wisepet_Slider::attributes" title="Sliders" translate="title" module="Wisepet_Slider" sortOrder="100" parent="Magento_Backend::content" resource="Wisepet_Slider::attributes"/>
+        <add id="Wisepet_Slider::entities" title="Sliders" translate="title" module="Wisepet_Slider" sortOrder="10" parent="Wisepet_Slider::attributes" action="slider/entity" resource="Wisepet_Slider::entity" />
+        <!--<add id="Wisepet_Slider::attributes_set" title="Entity types" translate="title" module="Wisepet_Slider" sortOrder="20" parent="Wisepet_Slider::attributes" action="slider/set" resource="Wisepet_Slider::attributes_set" />-->
+        <add id="Wisepet_Slider::attributes_attributes" title="Sliders" translate="title" module="Wisepet_Slider" sortOrder="100" parent="Magento_Backend::stores_attributes" action="slider/attribute" resource="Wisepet_Slider::attributes_attributes" />
+    </menu>
+</config>
